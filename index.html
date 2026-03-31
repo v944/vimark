@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Два пончика и чашка кофе</title>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --apple-white: #FFFFFF;
+            --apple-gray-50: #F5F5F7;
+            --apple-gray-100: #E8E8ED;
+            --apple-gray-200: #D2D2D7;
+            --apple-gray-400: #86868B;
+            --apple-gray-600: #424245;
+            --apple-gray-800: #1D1D1F;
+            --apple-blue: #0071E3;
+            --apple-blue-hover: #0077ED;
+            --glass-bg: rgba(255, 255, 255, 0.72);
+            --glass-border: rgba(255, 255, 255, 0.3);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--apple-white);
+            color: var(--apple-gray-800);
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation - Glassmorphism */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            padding: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav.scrolled {
+            background: var(--glass-bg);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 22px;
+            height: 52px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: 600;
+            color: var(--apple-gray-800);
+            text-decoration: none;
+            letter-spacing: -0.021em;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--apple-gray-800);
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--apple-gray-800);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--apple-gray-100);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            background: linear-gradient(180deg, var(--apple-white) 0%, var(--apple-gray-50) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 113, 227, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 113, 227, 0.1);
+            color: var(--apple-blue);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 24px;
+            animation: fadeIn 1s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 8vw, 80px);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.015em;
+            color: var(--apple-gray-800);
+            margin-bottom: 20px;
+            max-width: 800px;
+            animation: fadeInUp 1s ease 0.1s both;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(21px, 4vw, 28px);
+            font-weight: 400;
+            color: var(--apple-gray-600);
+            max-width: 600px;
+            margin-bottom: 40px;
+            line-height: 1.4;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .btn-primary {
+            background: var(--apple-blue);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: var(--apple-blue-hover);
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            color: var(--apple-blue);
+            padding: 14px 28px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-secondary:hover {
+            text-decoration: underline;
+        }
+
+        .hero-image {
+            margin-top: 60px;
+            max-width: 900px;
+            width: 100%;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 28px;
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 120px 20px;
+        }
+
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(32px, 6vw, 56px);
+            font-weight: 700;
+            letter-spacing: -0.021em;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            font-size: 21px;
+            color: var(--apple-gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--apple-white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            background: var(--apple-gray-50);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .about-content h3 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.021em;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .about-content p {
+            font-size: 19px;
+            color: var(--apple-gray-600);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--apple-gray-50);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .feature-item span:last-child {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--apple-gray-800);
+        }
+
+        /* Menu Section */
+        .menu {
+            background: var(--apple-gray-50);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .menu-card {
+            background: var(--apple-white);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
+        }
+
+        .menu-card-image {
+            height: 280px;
+            overflow: hidden;
+            position: relative;
+            background: var(--apple-gray-100);
+        }
+
+        .menu-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu-card:hover .menu-card-image img {
+            transform: scale(1.05);
+        }
+
+        .menu-card-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0, 113, 227, 0.9);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            backdrop-filter: blur(10px);
+        }
+
+        .menu-card-content {
+            padding: 28px;
+        }
+
+        .menu-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .menu-card h3 {
+            font-size: 21px;
+            font-weight: 600;
+            letter-spacing: -0.021em;
+        }
+
+        .menu-card .price {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--apple-gray-600);
+        }
+
+        .menu-card p {
+            font-size: 15px;
+            color: var(--apple-gray-400);
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .menu-card-tags {
+            display: flex;
+            gap: 8px;
+        }
+
+        .tag {
+            background: var(--apple-gray-50);
+            color: var(--apple-gray-600);
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--apple-gray-800);
+            color: var(--apple-white);
+        }
+
+        .contact .section-header h2 {
+            color: var(--apple-white);
+        }
+
+        .contact .section-header p {
+            color: var(--apple-gray-400);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .contact-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .contact-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 20px;
+        }
+
+        .contact-card h3 {
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: -0.021em;
+        }
+
+        .contact-card p {
+            font-size: 15px;
+            color: var(--apple-gray-400);
+            line-height: 1.6;
+        }
+
+        .hours-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 15px;
+        }
+
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+
+        .hours-list .day {
+            color: var(--apple-gray-400);
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            color: var(--apple-gray-400);
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 12px;
+        }
+
+        footer a {
+            color: var(--apple-gray-200);
+            text-decoration: none;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 52px;
+                left: 0;
+                right: 0;
+                background: var(--glass-bg);
+                backdrop-filter: saturate(180%) blur(20px);
+                flex-direction: column;
+                padding: 32px;
+                gap: 24px;
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.4s ease;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            .nav-links a {
+                font-size: 17px;
+                font-weight: 400;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            section {
+                padding: 80px 20px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .about-image {
+                order: -1;
+            }
+
+            .about-image img {
+                height: 350px;
+            }
+
+            .about-features {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">☕ Два пончика</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#menu">Меню</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <span class="hero-badge">✨ Новое меню</span>
+        <h1>Два пончика.<br>И чашка кофе.</h1>
+        <p class="hero-subtitle">Идеальное сочетание. Создано для тех, кто ценит моменты.</p>
+        <div class="hero-cta">
+            <a href="#menu" class="btn-primary">Посмотреть меню</a>
+            <a href="#contact" class="btn-secondary">Найти нас →</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://kimi-web-img.moonshot.cn/img/static.designboom.com/068c330cf440308c361cc388945af5ffb08fb7b8.jpg" alt="Минималистичный интерьер кофейни">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Каждая деталь<br>продумана.</h2>
+                <p>От зерна до чашки. От теста до пончика.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-content fade-in">
+                    <h3>Пространство, где хочется остаться.</h3>
+                    <p>Мы создали место без лишнего. Чистые линии, естественный свет, натуральные материалы. Здесь ничто не отвлекает от главного — от вкуса.</p>
+                    <p>Наши бариста обучены в школах Милана и Мельбурна. Пекарь приезжает в 5 утра, чтобы к вашему приходу всё было свежим.</p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">☕</div>
+                            <span>Single origin</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🍩</div>
+                            <span>Свежий крафт</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🌿</div>
+                            <span>Эко-упаковка</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">⚡</div>
+                            <span>Wi-Fi 6E</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image fade-in">
+                    <img src="https://kimi-web-img.moonshot.cn/img/static.dezeen.com/e153b8322d1b49d4f0a83925e630ef837c0f2b3e.jpg" alt="Минималистичный интерьер">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Меню.<br>Выбирайте.</h2>
+                <p>Четыре фирменных напитка. Каждый — произведение.</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card fade-in">
+                    <div class="menu-card-image">
+                        <img src="https://kimi-web-img.moonshot.cn/img/media.istockphoto.com/4979821ee9e9be3c6809c92b9da443d5793739ff.jpg" alt="Карамельный латте">
+                        <span class="menu-card-badge">Топ продаж</span>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3>Карамельный латте</h3>
+                            <span class="price">280 ₽</span>
+                        </div>
+                        <p>Эспрессо, молоко, домашняя солёная карамель. Латте-арт в каждой чашке.</p>
+                        <div class="menu-card-tags">
+                            <span class="tag">240 мл</span>
+                            <span class="tag">Горячий</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card fade-in">
+                    <div class="menu-card-image">
+                        <img src="https://kimi-web-img.moonshot.cn/img/www.knoxvillebrew.com/2bde6714eab954010c76f03e0b95039f528ac077.webp" alt="Раф">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3>Раф ванильный</h3>
+                            <span class="price">320 ₽</span>
+                        </div>
+                        <p>Кремовая текстура, натуральная ваниль, щепотка корицы. Наш фирменный рецепт.</p>
+                        <div class="menu-card-tags">
+                            <span class="tag">300 мл</span>
+                            <span class="tag">Авторский</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card fade-in">
+                    <div class="menu-card-image">
+                        <img src="https://kimi-web-img.moonshot.cn/img/www.tastingtable.com/9219250aae16e142a14251783225172dfa276f55.jpg" alt="Cold Brew">
+                        <span class="menu-card-badge">Новинка</span>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3>Cold Brew</h3>
+                            <span class="price">290 ₽</span>
+                        </div>
+                        <p>12-часовая экстракция. Ноты шоколада, орехов, цитруса. Со льдом.</p>
+                        <div class="menu-card-tags">
+                            <span class="tag">400 мл</span>
+                            <span class="tag">Холодный</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card fade-in">
+                    <div class="menu-card-image">
+                        <img src="https://kimi-web-img.moonshot.cn/img/www.tastingtable.com/1fa266ee19c5eb62096d7942d70e1c7573059fd6.jpg" alt="Мокко">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3>Мокко + Пончик</h3>
+                            <span class="price">350 ₽</span>
+                        </div>
+                        <p>Шоколадный кофе со сливками и наш фирменный пончик на выбор.</p>
+                        <div class="menu-card-tags">
+                            <span class="tag">Комбо</span>
+                            <span class="tag">Сладкое</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Ждём вас.</h2>
+                <p>Каждый день. В любую погоду.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card fade-in">
+                    <div class="contact-icon">📍</div>
+                    <h3>Локация</h3>
+                    <p>Москва, Большая Дмитровка, 12<br>м. Театральная</p>
+                </div>
+                <div class="contact-card fade-in">
+                    <div class="contact-icon">🕐</div>
+                    <h3>Часы работы</h3>
+                    <ul class="hours-list">
+                        <li><span class="day">Пн — Пт</span><span>07:00 — 22:00</span></li>
+                        <li><span class="day">Сб</span><span>08:00 — 23:00</span></li>
+                        <li><span class="day">Вс</span><span>09:00 — 21:00</span></li>
+                    </ul>
+                </div>
+                <div class="contact-card fade-in">
+                    <div class="contact-icon">📱</div>
+                    <h3>Контакты</h3>
+                    <p>+7 (495) 123-45-67<br>hello@dvaponchika.ru<br>@dvaponchika</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Два пончика и чашка кофе. Сделано с вниманием к деталям.</p>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+            });
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
