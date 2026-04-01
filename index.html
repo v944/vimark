@@ -44,7 +44,6 @@
         }
 
         :root {
-            /* Ресторанная палитра */
             --bg-dark: #0D0D0D;
             --bg-darker: #080808;
             --bg-card: #161616;
@@ -52,7 +51,6 @@
             --bg-overlay: rgba(0, 0, 0, 0.65);
             --bg-overlay-light: rgba(0, 0, 0, 0.4);
             
-            /* Золотые акценты */
             --gold: #C8A96B;
             --gold-hover: #B8944D;
             --gold-light: #D4B87A;
@@ -60,15 +58,17 @@
             --gold-glow: rgba(200, 169, 107, 0.3);
             --gold-subtle: rgba(200, 169, 107, 0.1);
             
-            /* Тексты */
             --text-primary: #FFFFFF;
             --text-secondary: #B8B8B8;
             --text-muted: #787878;
             --text-body: #A0A0A0;
             
-            /* Границы */
             --border: rgba(255, 255, 255, 0.08);
             --border-light: rgba(255, 255, 255, 0.04);
+
+            /* Состаренный эффект */
+            --vintage-overlay: rgba(70, 50, 20, 0.15);
+            --vintage-sepia: 0.3;
         }
 
         * {
@@ -88,7 +88,6 @@
             overflow-x: hidden;
         }
 
-        /* Focus styles */
         *:focus-visible {
             outline: 2px solid var(--gold);
             outline-offset: 4px;
@@ -401,33 +400,37 @@
             align-items: center;
         }
 
-        .about-images {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            position: relative;
-        }
-
-        .about-img {
-            border-radius: 0;
+        /* ЕДИНСТВЕННОЕ ФОТО С СОСТАРИВШИМСЯ ЭФФЕКТОМ */
+        .about-image-single {
             overflow: hidden;
             position: relative;
         }
 
-        .about-img:first-child {
-            margin-top: 40px;
-        }
-
-        .about-img img {
+        .about-image-single img {
             width: 100%;
-            height: 320px;
+            height: 560px;
             object-fit: cover;
             display: block;
-            transition: transform 0.6s ease;
+            /* Состарившийся эффект: сепия, тёплый тон, виньетка */
+            filter: sepia(0.3) saturate(0.7) brightness(0.85) contrast(1.1) hue-rotate(-5deg);
+            transition: filter 0.6s ease, transform 0.6s ease;
         }
 
-        .about-img:hover img {
-            transform: scale(1.05);
+        .about-image-single:hover img {
+            transform: scale(1.03);
+            filter: sepia(0.2) saturate(0.8) brightness(0.9) contrast(1.1) hue-rotate(-5deg);
+        }
+
+        /* Виньетка поверх фото */
+        .about-image-single::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at center, transparent 30%, rgba(60, 40, 20, 0.35) 100%),
+                linear-gradient(to bottom, rgba(70, 50, 20, 0.1) 0%, transparent 40%),
+                linear-gradient(to bottom, transparent 60%, rgba(20, 10, 0, 0.3) 100%);
+            pointer-events: none;
         }
 
         .section-label {
@@ -931,6 +934,7 @@
         /* ==================== RESPONSIVE ==================== */
         @media (max-width: 1024px) {
             .about-grid {
+                grid-template-columns: 1fr;
                 gap: 60px;
             }
 
@@ -944,6 +948,10 @@
 
             .menu-featured-image {
                 min-height: 300px;
+            }
+
+            .about-image-single img {
+                height: 400px;
             }
         }
 
@@ -1009,18 +1017,13 @@
                 padding: 80px 24px;
             }
 
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 48px;
-            }
-
-            .about-content {
-                order: -1;
-            }
-
             .about-features {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 16px;
+            }
+
+            .about-image-single img {
+                height: 320px;
             }
 
             .menu-grid {
@@ -1130,13 +1133,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="about-images reveal">
-                    <div class="about-img">
-                        <img src="https://kimi-web-img.moonshot.cn/img/static.dezeen.com/e153b8322d1b49d4f0a83925e630ef837c0f2b3e.jpg" alt="Интерьер кофейни" width="400" height="320" loading="lazy" decoding="async">
-                    </div>
-                    <div class="about-img">
-                        <img src="63444810841ce615a81cae6fea7b1f19.webp" alt="Напитки и пончики" width="400" height="320" loading="lazy" decoding="async">
-                    </div>
+                <div class="about-image-single reveal">
+                    <img src="premium_photo-1664192424225-86fac8067d2d.avif" alt="Состаренный интерьер кофейни Два пончика — винтажная атмосфера" width="600" height="560" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
