@@ -3,8 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>пончик и чашка кофе</title>
-    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Два пончика и чашка кофе — кофейня в Москве</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Уютная кофейня с фирменными напитками и свежими пончиками в центре Москвы. Большая Дмитровка, 12. Авторские рецепты, свежая выпечка каждый день.">
+    <meta name="keywords" content="кофейня Москва, кофе пончики, латте, капучино, кафе Большая Дмитровка, кофе на вынос, свежая выпечка">
+    <meta name="author" content="Два пончика и чашка кофе">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#F5F5F7">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Два пончика и чашка кофе">
+    <meta property="og:description" content="Уютная кофейня с фирменными напитками и свежими пончиками в центре Москвы. Большая Дмитровка, 12.">
+    <meta property="og:image" content="https://dvaponchika.ru/og-image.jpg">
+    <meta property="og:url" content="https://dvaponchika.ru">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="Два пончика и чашка кофе">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Два пончика и чашка кофе">
+    <meta name="twitter:description" content="Уютная кофейня с фирменными напитками и свежими пончиками в центре Москвы.">
+    <meta name="twitter:image" content="https://dvaponchika.ru/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- Fonts Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
@@ -26,6 +56,13 @@
             --apple-blue-hover: #0077ED;
             --glass-bg: rgba(255, 255, 255, 0.72);
             --glass-border: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Focus Visible for Accessibility */
+        *:focus-visible {
+            outline: 2px solid var(--apple-blue);
+            outline-offset: 4px;
+            border-radius: 4px;
         }
 
         html {
@@ -657,7 +694,7 @@
                 <li><a href="#menu">Меню</a></li>
                 <li><a href="#contact">Контакты</a></li>
             </ul>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Открыть меню">☰</button>
         </div>
     </nav>
 
@@ -671,7 +708,7 @@
             <a href="#contact" class="btn-secondary">Найти нас →</a>
         </div>
         <div class="hero-image">
-            <img src="premium_photo-1664192424225-86fac8067d2d.avif" alt="Минималистичный интерьер кофейни">
+            <img src="premium_photo-1664192424225-86fac8067d2d.avif" alt="Минималистичный интерьер кофейни Два пончика — светлый зал с деревянной мебелью" width="900" height="600">
         </div>
     </section>
 
@@ -707,7 +744,7 @@
                     </div>
                 </div>
                 <div class="about-image fade-in">
-                    <img src="https://kimi-web-img.moonshot.cn/img/static.dezeen.com/e153b8322d1b49d4f0a83925e630ef837c0f2b3e.jpg" alt="Минималистичный интерьер">
+                    <img src="https://kimi-web-img.moonshot.cn/img/static.dezeen.com/e153b8322d1b49d4f0a83925e630ef837c0f2b3e.jpg" alt="Интерьер кофейни Два пончика — чистые линии и естественный свет" width="600" height="500" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
@@ -723,7 +760,7 @@
             <div class="menu-grid">
                 <div class="menu-card fade-in">
                     <div class="menu-card-image">
-                        <img src="63444810841ce615a81cae6fea7b1f19.webp" alt="Карамельный латте">
+                        <img src="63444810841ce615a81cae6fea7b1f19.webp" alt="Карамельный латте в кофейне Два пончика — эспрессо с домашней солёной карамелью" width="400" height="280" loading="lazy" decoding="async">
                         <span class="menu-card-badge">Топ продаж</span>
                     </div>
                     <div class="menu-card-content">
@@ -741,7 +778,7 @@
 
                 <div class="menu-card fade-in">
                     <div class="menu-card-image">
-                        <img src="https://kimi-web-img.moonshot.cn/img/www.knoxvillebrew.com/2bde6714eab954010c76f03e0b95039f528ac077.webp" alt="Раф">
+                        <img src="https://kimi-web-img.moonshot.cn/img/www.knoxvillebrew.com/2bde6714eab954010c76f03e0b95039f528ac077.webp" alt="Ванильный раф — кремовый кофейный напиток с натуральной ванилью" width="400" height="280" loading="lazy" decoding="async">
                     </div>
                     <div class="menu-card-content">
                         <div class="menu-card-header">
@@ -758,7 +795,7 @@
 
                 <div class="menu-card fade-in">
                     <div class="menu-card-image">
-                        <img src="https://kimi-web-img.moonshot.cn/img/www.tastingtable.com/9219250aae16e142a14251783225172dfa276f55.jpg" alt="Cold Brew">
+                        <img src="https://kimi-web-img.moonshot.cn/img/www.tastingtable.com/9219250aae16e142a14251783225172dfa276f55.jpg" alt="Cold Brew — холодный кофе 12-часовой экстракции с нотами шоколада и цитруса" width="400" height="280" loading="lazy" decoding="async">
                         <span class="menu-card-badge">Новинка</span>
                     </div>
                     <div class="menu-card-content">
@@ -776,7 +813,7 @@
 
                 <div class="menu-card fade-in">
                     <div class="menu-card-image">
-                        <img src="https://kimi-web-img.moonshot.cn/img/www.tastingtable.com/1fa266ee19c5eb62096d7942d70e1c7573059fd6.jpg" alt="Мокко">
+                        <img src="https://kimi-web-img.moonshot.cn/img/www.tastingtable.com/1fa266ee19c5eb62096d7942d70e1c7573059fd6.jpg" alt="Мокко с пончиком — шоколадный кофе со сливками и фирменным пончиком" width="400" height="280" loading="lazy" decoding="async">
                     </div>
                     <div class="menu-card-content">
                         <div class="menu-card-header">
@@ -830,6 +867,45 @@
         <p>© 2024 Два пончика и чашка кофе. Сделано с вниманием к деталям.</p>
     </footer>
 
+    <!-- Schema.org JSON-LD для локального бизнеса -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CafeOrCoffeeShop",
+      "name": "Два пончика и чашка кофе",
+      "alternateName": "Два пончика",
+      "image": "https://dvaponchika.ru/hero-image.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Большая Дмитровка, 12",
+        "addressLocality": "Москва",
+        "addressCountry": "RU",
+        "postalCode": "125009"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 55.7601,
+        "longitude": 37.6186
+      },
+      "telephone": "+74951234567",
+      "email": "hello@dvaponchika.ru",
+      "openingHours": ["Mo-Fr 07:00-22:00", "Sa 08:00-23:00", "Su 09:00-21:00"],
+      "url": "https://dvaponchika.ru",
+      "priceRange": "₽₽",
+      "servesCuisine": "Coffee Shop",
+      "menu": "https://dvaponchika.ru/#menu",
+      "sameAs": [
+        "https://instagram.com/dvaponchika",
+        "https://t.me/dvaponchika"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "156"
+      }
+    }
+    </script>
+
     <script>
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
@@ -848,12 +924,14 @@
         mobileMenuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             mobileMenuBtn.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+            mobileMenuBtn.setAttribute('aria-label', navLinks.classList.contains('active') ? 'Закрыть меню' : 'Открыть меню');
         });
 
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
                 mobileMenuBtn.textContent = '☰';
+                mobileMenuBtn.setAttribute('aria-label', 'Открыть меню');
             });
         });
 
